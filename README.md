@@ -147,3 +147,4 @@ rho = dev.run(qc).result().get_density_matrix()
 ## Лицензия
 
 Apache 2.0, см. `LICENSE`.
+# qazsim
