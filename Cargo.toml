@@ -1,0 +1,21 @@
+[package]
+name = "qazsim-accelerate"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Rust core of the QazSim quantum simulator"
+
+[lib]
+name = "_accelerate"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.23", features = ["extension-module", "abi3-py39", "num-complex"] }
+numpy = "0.23"
+num-complex = "0.4"
+rayon = "1.10"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1

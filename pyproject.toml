@@ -1,0 +1,31 @@
+[build-system]
+requires = ["maturin>=1.5,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "qazsim"
+version = "0.1.0"
+description = "QazSim: quantum circuit simulator of the KazNU Quantum AI Laboratory"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Aksultan", email = "mukhanbetaksultan0414@gmail.com" }]
+keywords = ["quantum", "simulator", "quantum computing", "spinq"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Rust",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = ["numpy>=1.23"]
+
+[project.urls]
+Homepage = "https://github.com/AksultanMukhanbet/qazsim"
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.maturin]
+python-source = "python"
+module-name = "qazsim._accelerate"
+features = ["pyo3/extension-module"]
