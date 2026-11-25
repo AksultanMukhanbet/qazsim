@@ -172,7 +172,7 @@ fn apply_matrix(
     let slice = state
         .as_slice_mut()
         .map_err(|_| PyValueError::new_err("state must be a contiguous array"))?;
-    py.allow_threads(|| apply_matrix_inplace(slice, &mat, &qubits));
+    py.detach(|| apply_matrix_inplace(slice, &mat, &qubits));
     Ok(())
 }
 
@@ -185,7 +185,7 @@ fn probabilities<'py>(
     let slice = state
         .as_slice()
         .map_err(|_| PyValueError::new_err("state must be a contiguous array"))?;
-    let out: Vec<f64> = py.allow_threads(|| {
+    let out: Vec<f64> = py.detach(|| {
         if slice.len() >= PARALLEL_THRESHOLD {
             slice.par_iter().map(|a| a.norm_sqr()).collect()
         } else {
@@ -201,7 +201,7 @@ fn num_threads() -> usize {
     rayon::current_num_threads()
 }
 
-#[pymodule]
+#[pymodule(gil_used = false)]
 fn _accelerate(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(apply_matrix, m)?)?;
     m.add_function(wrap_pyfunction!(probabilities, m)?)?;
