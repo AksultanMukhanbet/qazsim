@@ -15,7 +15,7 @@ from .quantum_info import DensityMatrix, Operator, Statevector, state_fidelity
 from .simulator import Job, QazSim, QazSimError, Result
 from .transpiler import TranspilerError, transpile
 
-__version__ = "0.1.0"
+__version__ = "0.1.4"
 
 __all__ = [
     "QuantumCircuit", "Instruction", "Parameter", "ParameterVector", "ParameterExpression",
